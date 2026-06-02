@@ -98,7 +98,7 @@
 <!-- Login Form -->
 <div id="loginContainer" class="login-container">
     <h2><i class="fas fa-crown"></i> Admin Login</h2>
-    <input type="email" id="loginEmail" class="login-input" placeholder="Email" value="mujtabarehman30@gmail.com">
+    <input type="text" id="loginEmail" class="login-input" placeholder="Username" value="Qazimohsin6060">
     <input type="password" id="loginPassword" class="login-input" placeholder="Password">
     <button class="login-btn" onclick="doLogin()"><i class="fas fa-sign-in-alt"></i> Login</button>
 </div>
@@ -107,7 +107,7 @@
 <div id="adminDashboard" class="admin-dashboard">
 <div class="container">
     <div class="header">
-        <div class="logo"><div class="logo-icon"><i class="fas fa-crown"></i></div><h1>GM Store Admin</h1></div>
+        <div class="logo"><div class="logo-icon"><i class="fas fa-crown"></i></div><h1>Qazi Online Store Admin</h1></div>
         <div style="display: flex; gap: 20px; align-items: center;">
             <div class="theme-selector">
                 <div class="theme-dot default" style="background:linear-gradient(135deg,#ff6b6b,#a29bfe)" onclick="setTheme('default')"></div>
@@ -221,32 +221,32 @@
 </div>
 
 <script>
-    const ADMIN_EMAIL = "mujtabarehman30@gmail.com";
-    const ADMIN_PASSWORD = "Sahibzada@6060";
+    const ADMIN_USERNAME = "Qazimohsin6060";
+    const ADMIN_PASSWORD = "mohsin6060";
     
     function doLogin() {
-        let email = document.getElementById('loginEmail').value.trim();
+        let username = document.getElementById('loginEmail').value.trim();
         let password = document.getElementById('loginPassword').value.trim();
-        if(email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-            localStorage.setItem('gm_admin_logged_in', 'true');
+        if(username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+            localStorage.setItem('qazi_admin_logged_in', 'true');
             document.getElementById('loginContainer').style.display = 'none';
             document.getElementById('adminDashboard').classList.add('active');
             loadAdminData();
         } else {
-            Swal.fire('Error', 'Invalid email or password!', 'error');
+            Swal.fire('Error', 'Invalid username or password!', 'error');
         }
     }
     
     function doLogout() {
-        localStorage.removeItem('gm_admin_logged_in');
+        localStorage.removeItem('qazi_admin_logged_in');
         document.getElementById('loginContainer').style.display = 'block';
         document.getElementById('adminDashboard').classList.remove('active');
-        document.getElementById('loginEmail').value = ADMIN_EMAIL;
+        document.getElementById('loginEmail').value = ADMIN_USERNAME;
         document.getElementById('loginPassword').value = '';
     }
     
     function checkLogin() {
-        if(localStorage.getItem('gm_admin_logged_in') === 'true') {
+        if(localStorage.getItem('qazi_admin_logged_in') === 'true') {
             document.getElementById('loginContainer').style.display = 'none';
             document.getElementById('adminDashboard').classList.add('active');
             loadAdminData();
@@ -263,40 +263,40 @@
     let currentViewProduct = null;
 
     function loadAdminData() {
-        adminProducts = JSON.parse(localStorage.getItem('gm_admin_products')) || [];
-        categories = JSON.parse(localStorage.getItem('gm_categories')) || {};
-        clientRequests = JSON.parse(localStorage.getItem('gm_client_requests')) || [];
-        clientChats = JSON.parse(localStorage.getItem('gm_client_chats')) || {};
-        nextProductId = JSON.parse(localStorage.getItem('gm_next_product_id')) || 100;
+        adminProducts = JSON.parse(localStorage.getItem('qazi_admin_products')) || [];
+        categories = JSON.parse(localStorage.getItem('qazi_categories')) || {};
+        clientRequests = JSON.parse(localStorage.getItem('qazi_client_requests')) || [];
+        clientChats = JSON.parse(localStorage.getItem('qazi_client_chats')) || {};
+        nextProductId = JSON.parse(localStorage.getItem('qazi_next_product_id')) || 100;
         
         if (Object.keys(categories).length === 0) {
             categories = { "Electronics": "https://cdn-icons-png.flaticon.com/512/3659/3659898.png", "Fashion": "https://cdn-icons-png.flaticon.com/512/6174/6174039.png", "Home Decor": "https://cdn-icons-png.flaticon.com/512/2543/2543366.png" };
             saveAll();
         }
         if(adminProducts.length === 0) { 
-            adminProducts.push({ id: 1, name: "iPhone 15 Pro Max", price: 389000, discount: 10, finalPrice: 350100, stock: 12, whatsapp: "923001234567", category: "Electronics", images: ["https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=400"], description: "Latest A17 chip, 256GB", addedBy: "admin", sellerName: "GM Official" }); 
+            adminProducts.push({ id: 1, name: "iPhone 15 Pro Max", price: 389000, discount: 10, finalPrice: 350100, stock: 12, whatsapp: "923001234567", category: "Electronics", images: ["https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=400"], description: "Latest A17 chip, 256GB", addedBy: "admin", sellerName: "Qazi Official" }); 
             saveAll();
         }
         renderCategories(); renderAllProducts(); renderPendingRequests(); renderClientsList(); updateStats();
     }
 
     function saveAll() {
-        localStorage.setItem('gm_admin_products', JSON.stringify(adminProducts));
-        localStorage.setItem('gm_categories', JSON.stringify(categories));
-        localStorage.setItem('gm_client_requests', JSON.stringify(clientRequests));
-        localStorage.setItem('gm_client_chats', JSON.stringify(clientChats));
-        localStorage.setItem('gm_next_product_id', JSON.stringify(nextProductId));
+        localStorage.setItem('qazi_admin_products', JSON.stringify(adminProducts));
+        localStorage.setItem('qazi_categories', JSON.stringify(categories));
+        localStorage.setItem('qazi_client_requests', JSON.stringify(clientRequests));
+        localStorage.setItem('qazi_client_chats', JSON.stringify(clientChats));
+        localStorage.setItem('qazi_next_product_id', JSON.stringify(nextProductId));
         updateStats();
     }
 
-    function setTheme(theme) { document.body.className = theme === 'default' ? '' : 'theme-' + theme; localStorage.setItem('gm_admin_theme', theme); }
-    let savedTheme = localStorage.getItem('gm_admin_theme'); if(savedTheme && savedTheme !== 'default') setTheme(savedTheme);
+    function setTheme(theme) { document.body.className = theme === 'default' ? '' : 'theme-' + theme; localStorage.setItem('qazi_admin_theme', theme); }
+    let savedTheme = localStorage.getItem('qazi_admin_theme'); if(savedTheme && savedTheme !== 'default') setTheme(savedTheme);
     
     document.getElementById('coverInput').addEventListener('change', function(e) {
         let file = e.target.files[0];
-        if(file) { let reader = new FileReader(); reader.onload = ev => { document.getElementById('coverImage').src = ev.target.result; localStorage.setItem('gm_store_cover', ev.target.result); }; reader.readAsDataURL(file); }
+        if(file) { let reader = new FileReader(); reader.onload = ev => { document.getElementById('coverImage').src = ev.target.result; localStorage.setItem('qazi_store_cover', ev.target.result); }; reader.readAsDataURL(file); }
     });
-    let savedCover = localStorage.getItem('gm_store_cover'); if(savedCover) document.getElementById('coverImage').src = savedCover;
+    let savedCover = localStorage.getItem('qazi_store_cover'); if(savedCover) document.getElementById('coverImage').src = savedCover;
 
     let categoryImageData = null;
     document.getElementById('categoryImageUpload').addEventListener('change', function(e) {
@@ -366,7 +366,7 @@
             }
             editingProductId = null;
         } else {
-            let newProduct = { id: nextProductId++, name, price, discount, finalPrice, stock, whatsapp, category, images: [...currentProductImages], description, addedBy: "admin", sellerName: "GM Official" };
+            let newProduct = { id: nextProductId++, name, price, discount, finalPrice, stock, whatsapp, category, images: [...currentProductImages], description, addedBy: "admin", sellerName: "Qazi Official" };
             adminProducts.push(newProduct);
             Swal.fire({ icon: 'success', title: 'Product Added!', timer: 1500 });
         }
